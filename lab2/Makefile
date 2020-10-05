@@ -14,4 +14,4 @@ Lexer.o:
 	$(CXX) $(CFLAGS) Lexer.cpp
 
 clean:
-	rm -rf *.o
+	rm -rf *.o lab2
