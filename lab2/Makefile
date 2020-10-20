@@ -10,8 +10,8 @@ lab2: main.o Lexer.o
 main.o: main.cpp
 	$(CXX) $(CFLAGS) main.cpp
 
-Lexer.o:
+Lexer.o: Lexer.cpp
 	$(CXX) $(CFLAGS) Lexer.cpp
 
 clean:
-	rm -rf *.o
+	rm -rf *.o lab2
