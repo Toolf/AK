@@ -1,0 +1,1 @@
+$KDIR/scripts/checkpatch.pl -f hello.c

@@ -1,0 +1,4 @@
+cd ~/repos/busybox
+qemu-system-arm -kernel _install/boot/zImage -initrd rootfs.cpio.gz \
+-machine virt -nographic -m 512 \
+--append "root=/dev/ram0 rw console=ttyAMA0,115200 mem=512M"

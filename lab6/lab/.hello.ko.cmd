@@ -1,0 +1,1 @@
+cmd_/home/nazar/Projects/AK/lab6/lab/hello.ko := ccache arm-linux-gnueabihf-ld -r  -EL -T ./scripts/module-common.lds -T ./arch/arm/kernel/module.lds  --build-id  -o /home/nazar/Projects/AK/lab6/lab/hello.ko /home/nazar/Projects/AK/lab6/lab/hello.o /home/nazar/Projects/AK/lab6/lab/hello.mod.o ;  true

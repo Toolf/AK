@@ -1,0 +1,4 @@
+cp hello1.ko ~/repos/busybox/_install/AKlabs
+cp hello2.ko ~/repos/busybox/_install/AKlabs
+cd ~/repos/busybox/_install
+find . | cpio -o -H newc | gzip > ../rootfs.cpio.gz

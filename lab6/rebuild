@@ -1,0 +1,6 @@
+cp lab/*.ko ~/repos/busybox/_install/AKlabs
+
+cd ~/repos/busybox
+cd _install
+find . | cpio -o -H newc | gzip > ../rootfs.cpio.gz
+cd ..

@@ -1,0 +1,1 @@
+cmd_/home/nazar/Projects/AK/lab6/lab/main.ko := ccache arm-linux-gnueabihf-ld -r  -EL -T ./scripts/module-common.lds -T ./arch/arm/kernel/module.lds  --build-id  -o /home/nazar/Projects/AK/lab6/lab/main.ko /home/nazar/Projects/AK/lab6/lab/main.o /home/nazar/Projects/AK/lab6/lab/main.mod.o ;  true
