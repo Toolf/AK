@@ -1,1 +1,1 @@
-$KDIR/scripts/checkpatch.pl -f hello.c
+$KDIR/scripts/checkpatch.pl --terse --file --no-tree hello.c

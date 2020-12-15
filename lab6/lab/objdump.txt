@@ -1,0 +1,195 @@
+
+hello.ko.unstriped:     file format elf32-littlearm
+
+
+Disassembly of section .init.text:
+
+00000000 <init_module>:
+module_param(count, uint, 0444);
+MODULE_PARM_DESC(count, "Count to print 'Hello world'");
+
+
+static int __init hello_init(void)
+{
+   0:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+	uint i = 0;
+	struct list_item *tail;
+
+	pr_info("count: %d\n", count);
+   4:	e3004000 	movw	r4, #0
+   8:	e3404000 	movt	r4, #0
+   c:	e3000000 	movw	r0, #0
+  10:	e3400000 	movt	r0, #0
+  14:	e5941000 	ldr	r1, [r4]
+  18:	e1a05004 	mov	r5, r4
+  1c:	ebfffffe 	bl	0 <printk>
+
+	if (count == 0 || (count >= 5 && count <= 10))
+  20:	e5943000 	ldr	r3, [r4]
+  24:	e2432005 	sub	r2, r3, #5
+  28:	e3530000 	cmp	r3, #0
+  2c:	13520005 	cmpne	r2, #5
+  30:	8a000002 	bhi	40 <init_module+0x40>
+		pr_warn("WARNING\nThe parameter is between 5 and 10 or 0");
+  34:	e3000000 	movw	r0, #0
+  38:	e3400000 	movt	r0, #0
+  3c:	ebfffffe 	bl	0 <printk>
+	BUG_ON(count > 10);
+  40:	e5953000 	ldr	r3, [r5]
+  44:	e353000a 	cmp	r3, #10
+  48:	9a000000 	bls	50 <init_module+0x50>
+  4c:	e7f001f2 	.word	0xe7f001f2
+{
+	if (!__list_add_valid(new, prev, next))
+		return;
+
+	next->prev = new;
+	new->next = next;
+  50:	e59f908c 	ldr	r9, [pc, #140]	; e4 <init_module+0xe4>
+			unsigned int index = kmalloc_index(size);
+
+			if (!index)
+				return ZERO_SIZE_PTR;
+
+			return kmem_cache_alloc_trace(kmalloc_caches[index],
+  54:	e3007000 	movw	r7, #0
+  58:	e3a080c0 	mov	r8, #192	; 0xc0
+  5c:	e3407000 	movt	r7, #0
+  60:	e3408060 	movt	r8, #96	; 0x60
+
+	for (i = 0 ; i < count; i++) {
+  64:	e3a04000 	mov	r4, #0
+  68:	e5953000 	ldr	r3, [r5]
+  6c:	e1530004 	cmp	r3, r4
+  70:	9a000019 	bls	dc <init_module+0xdc>
+  74:	e3a02010 	mov	r2, #16
+  78:	e1a01008 	mov	r1, r8
+  7c:	e5970018 	ldr	r0, [r7, #24]
+  80:	ebfffffe 	bl	0 <kmem_cache_alloc_trace>
+		//kmalloc вызывающая функция выполняет
+		//системный вызов от имени процесса
+		tail = kmalloc(sizeof(struct list_item), GFP_KERNEL); //e7f001f2
+		if (i == 5)
+  84:	e3540005 	cmp	r4, #5
+  88:	e1a06000 	mov	r6, r0
+  8c:	0a000001 	beq	98 <init_module+0x98>
+		    tail = 0; // начебто kmalloc повернув 0
+		if(ZERO_OR_NULL_PTR(tail))
+  90:	e3500010 	cmp	r0, #16
+  94:	8a000003 	bhi	a8 <init_module+0xa8>
+	}
+
+	return 0;
+
+error:
+	pr_err("kmalloc out of memory");
+  98:	e3000000 	movw	r0, #0
+  9c:	e3400000 	movt	r0, #0
+  a0:	ebfffffe 	bl	0 <printk>
+	BUG();
+  a4:	e7f001f2 	.word	0xe7f001f2
+		tail->time = ktime_get();
+  a8:	ebfffffe 	bl	0 <ktime_get>
+ * Insert a new entry before the specified head.
+ * This is useful for implementing queues.
+ */
+static inline void list_add_tail(struct list_head *new, struct list_head *head)
+{
+	__list_add(new, head->prev, head);
+  ac:	e5952008 	ldr	r2, [r5, #8]
+  b0:	e1a03006 	mov	r3, r6
+	for (i = 0 ; i < count; i++) {
+  b4:	e2844001 	add	r4, r4, #1
+		tail->time = ktime_get();
+  b8:	e0c300f8 	strd	r0, [r3], #8
+		pr_info("Hello world\n");
+  bc:	e3000000 	movw	r0, #0
+	new->next = next;
+  c0:	e5869008 	str	r9, [r6, #8]
+  c4:	e3400000 	movt	r0, #0
+	next->prev = new;
+  c8:	e5853008 	str	r3, [r5, #8]
+	new->prev = prev;
+  cc:	e586200c 	str	r2, [r6, #12]
+static __always_inline void __write_once_size(volatile void *p, void *res, int size)
+{
+	switch (size) {
+	case 1: *(volatile __u8 *)p = *(__u8 *)res; break;
+	case 2: *(volatile __u16 *)p = *(__u16 *)res; break;
+	case 4: *(volatile __u32 *)p = *(__u32 *)res; break;
+  d0:	e5823000 	str	r3, [r2]
+  d4:	ebfffffe 	bl	0 <printk>
+  d8:	eaffffe2 	b	68 <init_module+0x68>
+	return -ENOMEM;
+}
+  dc:	e3a00000 	mov	r0, #0
+  e0:	e8bd87f0 	pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+  e4:	00000004 	.word	0x00000004
+
+Disassembly of section .exit.text:
+
+00000000 <cleanup_module>:
+
+static void __exit hello_exit(void)
+{
+	struct list_item *md, *tmp;
+
+	list_for_each_entry_safe(md, tmp, &my_list_head, list_node) {
+   0:	e3003000 	movw	r3, #0
+   4:	e3403000 	movt	r3, #0
+{
+   8:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+		pr_info("time: %lld\n", md->time);
+   c:	e3007000 	movw	r7, #0
+	list_for_each_entry_safe(md, tmp, &my_list_head, list_node) {
+  10:	e5934004 	ldr	r4, [r3, #4]
+		pr_info("time: %lld\n", md->time);
+  14:	e3407000 	movt	r7, #0
+	list_for_each_entry_safe(md, tmp, &my_list_head, list_node) {
+  18:	e2838004 	add	r8, r3, #4
+}
+
+static inline void list_del(struct list_head *entry)
+{
+	__list_del_entry(entry);
+	entry->next = LIST_POISON1;
+  1c:	e3a09c01 	mov	r9, #256	; 0x100
+  20:	e1a06003 	mov	r6, r3
+  24:	e4145008 	ldr	r5, [r4], #-8
+  28:	e2455008 	sub	r5, r5, #8
+  2c:	e2843008 	add	r3, r4, #8
+  30:	e1530008 	cmp	r3, r8
+  34:	0a00000e 	beq	74 <cleanup_module+0x74>
+		pr_info("time: %lld\n", md->time);
+  38:	e1c420d0 	ldrd	r2, [r4]
+  3c:	e1a00007 	mov	r0, r7
+  40:	ebfffffe 	bl	0 <printk>
+	__list_del(entry->prev, entry->next);
+  44:	e1c420d8 	ldrd	r2, [r4, #8]
+	entry->prev = LIST_POISON2;
+  48:	e3a01c02 	mov	r1, #512	; 0x200
+		list_del(&md->list_node);
+		kfree(md);
+  4c:	e1a00004 	mov	r0, r4
+	next->prev = prev;
+  50:	e5823004 	str	r3, [r2, #4]
+  54:	e5832000 	str	r2, [r3]
+	entry->next = LIST_POISON1;
+  58:	e5849008 	str	r9, [r4, #8]
+	entry->prev = LIST_POISON2;
+  5c:	e584100c 	str	r1, [r4, #12]
+	list_for_each_entry_safe(md, tmp, &my_list_head, list_node) {
+  60:	e1a04005 	mov	r4, r5
+		kfree(md);
+  64:	ebfffffe 	bl	0 <kfree>
+	list_for_each_entry_safe(md, tmp, &my_list_head, list_node) {
+  68:	e5955008 	ldr	r5, [r5, #8]
+  6c:	e2455008 	sub	r5, r5, #8
+  70:	eaffffed 	b	2c <cleanup_module+0x2c>
+	__READ_ONCE_SIZE;
+  74:	e5963004 	ldr	r3, [r6, #4]
+	}
+	BUG_ON(!list_empty(&my_list_head));
+  78:	e1530008 	cmp	r3, r8
+  7c:	08bd87f0 	popeq	{r4, r5, r6, r7, r8, r9, sl, pc}
+  80:	e7f001f2 	.word	0xe7f001f2
